@@ -1,0 +1,7 @@
+{
+    "explorer.excludeGitIgnore": true,
+    "cSpell.language": "en-GB",
+    "files.exclude": {
+        "**/.vscode": true
+    }
+}
