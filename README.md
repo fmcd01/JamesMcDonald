@@ -26,7 +26,12 @@ To install TeX Live on macOS, follow these steps:
 3. **Verify Installation**:
    Open the Terminal application and type `tex --version` to verify that TeX Live has been installed correctly. You should see output indicating the version of TeX Live installed.
 
-
+4. **Install "File::HomeDir"**;
+   For LaTex formatter, latexindent, to work on mac, you must run install `File::HomeDir` and `Unicode::GCString`
+   ```bash
+   sudo cpan -i File::HomeDir
+   sudo cpan -i Unicode::GCString
+   ```
 
 ### Compilation Instructions
 1. Clone the repository to your local machine.

@@ -1,7 +1,21 @@
 {
-    "explorer.excludeGitIgnore": true,
-    "cSpell.language": "en-GB",
-    "files.exclude": {
-        "**/.vscode": true
-    }
+  "explorer.excludeGitIgnore": true,
+  "cSpell.language": "en-GB",
+  "files.exclude": {
+    "**/.vscode": true
+  },
+  "editor.formatOnSave": true,
+  "[latex]": {
+    "editor.defaultFormatter": "James-Yu.latex-workshop"
+  },
+  "latex-workshop.formatting.latex": "latexindent",
+  "latex-workshop.formatting.latexindent.path": "latexindent",
+  "latex-workshop.formatting.latexindent.args": [
+    "-l",
+    "-m",
+    "-c",
+    "%DIR%/",
+    "%TMPFILE%",
+    "-y=defaultIndent: '%INDENT%'"
+  ]
 }
