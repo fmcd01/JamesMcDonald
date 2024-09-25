@@ -1,8 +1,26 @@
-\usepackage{lipsum} % For dummy text
-\usepackage[backend=biber,style=authoryear]{biblatex} % For bibliography
+%%% PAGE DIMENSIONS
+\stockaiv
+\pagesuperroyalvo
+\setlength{\trimtop}{0pt}
+\setlength{\trimedge}{\stockwidth}
+\addtolength{\trimedge}{-\paperwidth}
+\setlrmarginsandblock{15mm}{15mm}{*}
+\setulmarginsandblock{15mm}{15mm}{*}
+\setheadfoot{\onelineskip}{2\onelineskip}
+\setheaderspaces{*}{*}{1.618}
+\checkandfixthelayout
+
+%%% TITLE PAGE
 \title{James, Mary \& Alexander McDonald}
 \author{Francois McDonald}
 \date{\today}
 
+%%% INDEX
 \makeindex
+
+%%% BIBLIOGRAPHY
+\usepackage[backend=biber,style=authoryear]{biblatex} % For bibliography
 \addbibresource{bibliography/references.bib} % Add bibliography file
+
+%%% USEFUL PACKAGES
+\usepackage{lipsum} % For dummy text
