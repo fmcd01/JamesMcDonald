@@ -1,6 +1,7 @@
 %%% PAGE DIMENSIONS
 \stockaiv
-\pagesuperroyalvo
+%\pagesuperroyalvo
+\pageroyalvo
 \setlength{\trimtop}{0pt}
 \setlength{\trimedge}{\stockwidth}
 \addtolength{\trimedge}{-\paperwidth}
@@ -25,3 +26,16 @@
 %%% USEFUL PACKAGES
 \usepackage{lipsum} % For dummy text
 \usepackage[svgnames]{xcolor} % Required for colour specification
+
+%%% SET THE DEFAULT FONT TO PALATINO
+%\usepackage{mathpazo}
+
+%%% CREATE A CUSTOM PAGE STYLE
+\makepagestyle{mystyle}
+
+% Set the header and footer
+\makeevenhead{mystyle}{\thepage}{}{}
+\makeoddhead{mystyle}{\thepage}{}{}
+
+% Set the custom page style
+\pagestyle{mystyle}
