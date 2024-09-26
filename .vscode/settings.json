@@ -1,6 +1,16 @@
 {
   "explorer.excludeGitIgnore": true,
   "cSpell.language": "en-GB",
+  "cSpell.enabled": true,
+  "cSpell.customDictionaries": {
+    "project-words": {
+      "name": "dictionary",
+      "path": "${workspaceRoot}/dictionary.txt",
+      "description": "Words used in this project",
+      "addWords": true
+    },
+    "custom": true // Enable the `custom` dictionary
+  },
   "files.exclude": {
     "**/.vscode": true
   },
