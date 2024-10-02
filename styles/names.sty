@@ -49,7 +49,7 @@
 \NewDocumentCommand{\getNickname}{m}{
     \seq_map_inline:Nn \l_people_data_seq {
         \keys_set:nn { individual } { ##1 }
-        \str_if_eq:VnT \l_uniqueid_tl { #1 }{\l_nickname_tl}
+        \str_if_eq:VnT \l_uniqueid_tl { #1 }{ \seq_map_break:n {\l_nickname_tl} }
     }
 }
 
@@ -57,7 +57,7 @@
 \NewDocumentCommand{\getSurname}{m}{
     \seq_map_inline:Nn \l_people_data_seq {
         \keys_set:nn { individual } { ##1 }
-        \str_if_eq:VnT \l_uniqueid_tl { #1 }{\l_surname_tl}
+        \str_if_eq:VnT \l_uniqueid_tl { #1 }{ \seq_map_break:n { \l_surname_tl} }
     }
 }
 
@@ -65,7 +65,7 @@
 \NewDocumentCommand{\getFullNames}{m}{
     \seq_map_inline:Nn \l_people_data_seq {
         \keys_set:nn { individual } { ##1 }
-        \str_if_eq:VnT \l_uniqueid_tl { #1 }{\l_fullnames_tl}
+        \str_if_eq:VnT \l_uniqueid_tl { #1 }{ \seq_map_break:n { \l_fullnames_tl } }
     }
 }
 
@@ -73,7 +73,7 @@
 \NewDocumentCommand{\getInitials}{m}{
     \seq_map_inline:Nn \l_people_data_seq {
         \keys_set:nn { individual } { ##1 }
-        \str_if_eq:VnT \l_uniqueid_tl { #1 }{\l_initials_tl}
+        \str_if_eq:VnT \l_uniqueid_tl { #1 }{ \seq_map_break:n {\l_initials_tl} }
     }
 }
 
