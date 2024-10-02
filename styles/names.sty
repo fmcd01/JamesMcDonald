@@ -37,12 +37,12 @@
         initials = {\extractInitials:n{#4}} % Initials of the individual
     }
 
-    \expandafter\newcommand\csname #1Name\endcsname{{#3\space#2}}
-    \expandafter\newcommand\csname #1FullNames\endcsname{{#4\space#2}}
-    \expandafter\newcommand\csname #1NameOnly\endcsname{{#3}}
-    \expandafter\newcommand\csname #1Surname\endcsname{{#2}}
-    \expandafter\newcommand\csname #1FullNamesAndNickname\endcsname{{#4\space#2}~(aka~#3)}
-    \expandafter\newcommand\csname #1Initials\endcsname{\extractInitials:n{#4}~#2}
+    \expandafter\newcommand\csname #1Name\endcsname{{#3\space#2 \index{#2!#4}}}
+    \expandafter\newcommand\csname #1FullNames\endcsname{{#4\space#2 \index{#2!#4}}}
+    \expandafter\newcommand\csname #1NameOnly\endcsname{{#3 \index{#2!#4}}}
+    \expandafter\newcommand\csname #1Surname\endcsname{{#2 \index{#2!#4}}}
+    \expandafter\newcommand\csname #1FullNamesAndNickname\endcsname{{#4\space#2}~(aka~#3) \index{#2!#4} }
+    \expandafter\newcommand\csname #1Initials\endcsname{\extractInitials:n{#4}~#2 \index{#2!#4} }
 }
 
 % Define a command to extract the first name of an individual using their unique ID
