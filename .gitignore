@@ -1,5 +1,6 @@
 ## latexindent files
 *.bak?
+*.*-SAVE-ERROR
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
