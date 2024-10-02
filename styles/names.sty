@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{genealogy}[2024/09/27 Genealogy package for handling names with unique IDs]
+\ProvidesPackage{names}[2024/09/27 Names package for handling people's names in genealogy documents. It provides commands to define individuals, extract their names in various formats, including married names by defining marriages between individuals.]
 
 \RequirePackage{xparse}
 \RequirePackage{expl3}
@@ -8,19 +8,19 @@
 \ExplSyntaxOn
 
 % Define a sequence to store the data for each individual
-\seq_new:N \l_genealogy_individuals_seq
+\seq_new:N \l_people_data_seq
 
-% Define keys for the data stored for each individual in the l_genealogy_individuals_seq sequence
-\keys_define:nn { genealogy } {
+% Define keys for the data stored for each individual in the l_people_data_seq sequence
+\keys_define:nn { individual } {
     uniqueid .code:n = { \tl_set:Nn \l_uniqueid_tl { #1 } },
     surname .code:n = { \tl_set:Nn \l_surname_tl { #1 } },
-    firstname .code:n = { \tl_set:Nn \l_firstname_tl { #1 } },
-    allnames .code:n = { \tl_set:Nn \l_allnames_tl { #1 } },
+    nickname .code:n = { \tl_set:Nn \l_nickname_tl { #1 } },
+    fullnames .code:n = { \tl_set:Nn \l_fullnames_tl { #1 } },
     initials .code:n = { \tl_set:Nn \l_initials_tl { #1 } },
 }
 
 % Define a command to extract the initials of a full names
-\cs_new:Npn \extract_initials:n #1 {
+\cs_new:Npn \extractInitials:n #1 {
     \seq_set_split:Nnn \l_tmpa_seq { ~ } { #1 } % Split the full name by spaces
     \seq_map_inline:Nn \l_tmpa_seq {
         \tl_head:n { ##1 } .~ % Extract the first character of each word and append a period
@@ -28,85 +28,88 @@
 }
 
 % Define individual using a unique ID, surname, first name, and full names
-\NewDocumentCommand{\newindividual}{m m m m}{
-    \seq_put_right:Nn \l_genealogy_individuals_seq {
-        uniqueid={#1},surname={#2},firstname={#3},allnames={#4},
-        initials={\extract_initials:n{#4}}
+\NewDocumentCommand{\newPerson}{m m m m}{
+    \seq_put_right:Nn \l_people_data_seq {
+        uniqueid = {#1},  % Unique ID for the individual
+        surname = {#2},   % Surname of the individual
+        nickname = {#3},       % Name person is commonly know know as
+        fullnames = {#4}, % Full names of the individual
+        initials = {\extractInitials:n{#4}} % Initials of the individual
     }
 
     \expandafter\newcommand\csname #1Name\endcsname{{#3\space#2}}
-    \expandafter\newcommand\csname #1Full\endcsname{{#4\space#2}}
-    \expandafter\newcommand\csname #1Firstname\endcsname{{#3}}
+    \expandafter\newcommand\csname #1FullNames\endcsname{{#4\space#2}}
+    \expandafter\newcommand\csname #1NameOnly\endcsname{{#3}}
     \expandafter\newcommand\csname #1Surname\endcsname{{#2}}
-    \expandafter\newcommand\csname #1Aka\endcsname{{#4\space#2}~(aka~#3)}
-    \expandafter\newcommand\csname #1Initials\endcsname{\extract_initials:n{#4}~#2}
+    \expandafter\newcommand\csname #1FullNamesAndNickname\endcsname{{#4\space#2}~(aka~#3)}
+    \expandafter\newcommand\csname #1Initials\endcsname{\extractInitials:n{#4}~#2}
 }
 
 % Define a command to extract the first name of an individual using their unique ID
-\NewDocumentCommand{\firstname}{m}{
-    \seq_map_inline:Nn \l_genealogy_individuals_seq {
-        \keys_set:nn { genealogy } { ##1 }
-        \str_if_eq:VnT \l_uniqueid_tl { #1 }{\l_firstname_tl}
+\NewDocumentCommand{\getNickname}{m}{
+    \seq_map_inline:Nn \l_people_data_seq {
+        \keys_set:nn { individual } { ##1 }
+        \str_if_eq:VnT \l_uniqueid_tl { #1 }{\l_nickname_tl}
     }
 }
 
 % Define a command to extract the surname of an individual using their unique ID
-\NewDocumentCommand{\surname}{m}{
-    \seq_map_inline:Nn \l_genealogy_individuals_seq {
-        \keys_set:nn { genealogy } { ##1 }
+\NewDocumentCommand{\getSurname}{m}{
+    \seq_map_inline:Nn \l_people_data_seq {
+        \keys_set:nn { individual } { ##1 }
         \str_if_eq:VnT \l_uniqueid_tl { #1 }{\l_surname_tl}
     }
 }
 
 % Define a command to extract the full names of an individual using their unique ID
-\NewDocumentCommand{\fullnames}{m}{
-    \seq_map_inline:Nn \l_genealogy_individuals_seq {
-        \keys_set:nn { genealogy } { ##1 }
-        \str_if_eq:VnT \l_uniqueid_tl { #1 }{\l_allnames_tl}
+\NewDocumentCommand{\getFullNames}{m}{
+    \seq_map_inline:Nn \l_people_data_seq {
+        \keys_set:nn { individual } { ##1 }
+        \str_if_eq:VnT \l_uniqueid_tl { #1 }{\l_fullnames_tl}
     }
 }
 
 % Define a command to extract the initials of an individual using their unique ID
-\NewDocumentCommand{\initials}{m}{
-    \seq_map_inline:Nn \l_genealogy_individuals_seq {
-        \keys_set:nn { genealogy } { ##1 }
+\NewDocumentCommand{\getInitials}{m}{
+    \seq_map_inline:Nn \l_people_data_seq {
+        \keys_set:nn { individual } { ##1 }
         \str_if_eq:VnT \l_uniqueid_tl { #1 }{\l_initials_tl}
     }
 }
 
-% Define a command to marry two individuals, by providing and new unique ID for the married bride, the unige ID of the bride and the unique ID of the groom. This will create new commands for the married bride, including their full name, first name, surname, initials, aka, and née name and née full name.
+% Define a command to marry two individuals, by providing and new unique ID for the married bride, the unige ID of the bride and the unique ID of the groom. This will create new commands for the married bride, including their full name, first name, surname, initials, nickname, and née name and née full name.
 \NewDocumentCommand{\marry}{m m m}{
 
     \exp_args:Nc \NewDocumentCommand{#1Name}{}{
-        \firstname{#2}~\surname{#3}
+        \getNickname{#2}~\getSurname{#3}
     }
 
-    \exp_args:Nc \NewDocumentCommand{#1Full}{}{
-        \fullnames{#2}~\surname{#3}
+    \exp_args:Nc \NewDocumentCommand{#1FullNames}{}{
+        \getFullNames{#2}~\getSurname{#3}
     }
 
-    \exp_args:Nc \NewDocumentCommand{#1Firstname}{}{
-        \firstname{#2}
+    \exp_args:Nc \NewDocumentCommand{#1NameOnly}{}{
+        \getNickname{#2}
     }
 
     \exp_args:Nc \NewDocumentCommand{#1Surname}{}{
-        \surname{#2}
+        \getSurname{#2}
     }
 
-    \exp_args:Nc \NewDocumentCommand{#1Aka}{}{
-        \fullnames{#2}~\surname{#3}~(aka~\firstname{#2})
+    \exp_args:Nc \NewDocumentCommand{#1FullNamesAndNickname}{}{
+        \getFullNames{#2}~\getSurname{#3}~(aka~\getNickname{#2})
     }
 
     \exp_args:Nc \NewDocumentCommand{#1Initials}{}{
-        \initials{#2}~\surname{#3}
+        \getInitials{#2}~\getSurname{#3}
     }
 
-    \exp_args:Nc \NewDocumentCommand{#1Namenee}{}{
-        \firstname{#2}~\surname{#3}~(née~\surname{#2})
+    \exp_args:Nc \NewDocumentCommand{#1NameNee}{}{
+        \getNickname{#2}~\getSurname{#3}~(née~\getSurname{#2})
     }
 
-    \exp_args:Nc \NewDocumentCommand{#1Fullnee}{}{
-        \fullnames{#2}~\surname{#3}~(née~\surname{#2})
+    \exp_args:Nc \NewDocumentCommand{#1FullNamesNee}{}{
+        \getFullNames{#2}~\getSurname{#3}~(née~\getSurname{#2})
     }
 }
 
