@@ -17,7 +17,10 @@
 \date{\today}
 
 %%% INDEX
-\makeindex
+\usepackage[makeindex]{imakeidx}
+\makeindex[name=main,title=Index,columns=1]
+\makeindex[name=people,title=Index of People,columns=1]
+%\renewcommand{\seealso}[2]{\\\textit{see also} #1}
 
 %%% BIBLIOGRAPHY
 \usepackage[backend=biber,style=authoryear]{biblatex} % For bibliography

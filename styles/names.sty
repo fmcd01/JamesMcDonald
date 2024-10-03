@@ -1,6 +1,6 @@
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{names}[2024/09/27 Names package for handling people's names in genealogy documents. It provides commands to define individuals, extract their names in various formats, including married names by defining marriages between individuals.]
+\ProvidesPackage{./styles/names}
 
+\NeedsTeXFormat{LaTeX2e}
 \RequirePackage{xparse}
 \RequirePackage{expl3}
 \RequirePackage{xstring}
@@ -37,12 +37,12 @@
         initials = {\extractInitials:n{#4}} % Initials of the individual
     }
 
-    \expandafter\newcommand\csname #1Name\endcsname{{#3\space#2 \index{#2!#4}}}
-    \expandafter\newcommand\csname #1FullNames\endcsname{{#4\space#2 \index{#2!#4}}}
-    \expandafter\newcommand\csname #1NameOnly\endcsname{{#3 \index{#2!#4}}}
-    \expandafter\newcommand\csname #1Surname\endcsname{{#2 \index{#2!#4}}}
-    \expandafter\newcommand\csname #1FullNamesAndNickname\endcsname{{#4\space#2}~(aka~#3) \index{#2!#4} }
-    \expandafter\newcommand\csname #1Initials\endcsname{\extractInitials:n{#4}~#2 \index{#2!#4} }
+    \expandafter\newcommand\csname #1Name\endcsname{{#3\space#2 \index[people]{#2!#4}}}
+    \expandafter\newcommand\csname #1FullNames\endcsname{{#4\space#2 \index[people]{#2!#4}}}
+    \expandafter\newcommand\csname #1NameOnly\endcsname{{#3 \index[people]{#2!#4}}}
+    \expandafter\newcommand\csname #1Surname\endcsname{{#2 \index[people]{#2!#4}}}
+    \expandafter\newcommand\csname #1FullNamesAndNickname\endcsname{{#4\space#2}~(aka~#3) \index[people]{#2!#4} }
+    \expandafter\newcommand\csname #1Initials\endcsname{\extractInitials:n{#4}~#2 \index[people]{#2!#4} }
 }
 
 % Define a command to extract the first name of an individual using their unique ID
@@ -77,39 +77,108 @@
     }
 }
 
+% Define a command to create an index entry for a bride with using her married name and full names
+\NewDocumentCommand{\createIndexEntry}{m m}{
+    \group_begin:
+
+    % Extract the new surname of the bride from the groom's unique ID
+    \seq_map_inline:Nn \l_people_data_seq {
+        \keys_set:nn { individual } { ##1 }
+        \str_if_eq:VnT \l_uniqueid_tl { #2 }{
+            \tl_set:Nn \l_tmpa_tl { \l_surname_tl }
+            \seq_map_break:
+        }
+    }
+    \edef\expandedGroomSurname{\tl_use:N \l_tmpa_tl} % Expand Surname
+
+    % Extract the full names of the bride from the bride's unique ID
+    \seq_map_inline:Nn \l_people_data_seq {
+        \keys_set:nn { individual } { ##1 }
+        \str_if_eq:VnT \l_uniqueid_tl { #1 }{
+            \tl_set:Nn \l_tmpb_tl { \l_fullnames_tl }
+            \seq_map_break:
+        }
+    }
+
+    \edef\expandedBrideFullNames{\tl_use:N \l_tmpb_tl} % Expand Full Names
+    \index[people]{\expandedGroomSurname!\expandedBrideFullNames}
+    \group_end:
+}
+
+% Create a seealso index entry for a bride under her married name to point to her maiden name
+\NewDocumentCommand{\createSeealsoIndexEntry}{m m}{
+\group_begin:
+
+% Extract the new surname of the bride from the groom's unique ID
+\seq_map_inline:Nn \l_people_data_seq {
+    \keys_set:nn { individual } { ##1 }
+    \str_if_eq:VnT \l_uniqueid_tl { #2 }{
+        \tl_set:Nn \l_tmpa_tl { \l_surname_tl }
+        \seq_map_break:
+    }
+}
+\edef\expandedGroomSurname{\tl_use:N \l_tmpa_tl} % Expand Surname
+
+% Extract the full names of the bride from the bride's unique ID
+\seq_map_inline:Nn \l_people_data_seq {
+    \keys_set:nn { individual } { ##1 }
+    \str_if_eq:VnT \l_uniqueid_tl { #1 }{
+        \tl_set:Nn \l_tmpb_tl { \l_fullnames_tl }
+        \tl_set:Nn \l_tmpc_tl { \l_surname_tl }
+        \seq_map_break:
+    }
+}
+
+\edef\expandedBrideFullNames{\tl_use:N \l_tmpb_tl} % Expand Full Names
+\edef\expandedBrideSurname{\tl_use:N \l_tmpc_tl} % Expand Surname
+\index[people]{\expandedBrideSurname!\expandedBrideFullNames|seealso {\expandedGroomSurname}}
+\group_end:
+}
+
 % Define a command to marry two individuals, by providing and new unique ID for the married bride, the unige ID of the bride and the unique ID of the groom. This will create new commands for the married bride, including their full name, first name, surname, initials, nickname, and née name and née full name.
 \NewDocumentCommand{\marry}{m m m}{
 
-    \exp_args:Nc \NewDocumentCommand{#1Name}{}{
+    % Create a single see also index entry for the bride under her married name to point to her maiden name
+    \createSeealsoIndexEntry{#2}{#3}
+
+    \exp_args:Nc \NewDocumentCommand{#1Name} {} {
         \getNickname{#2}~\getSurname{#3}
+        \createIndexEntry{#2}{#3}
     }
 
-    \exp_args:Nc \NewDocumentCommand{#1FullNames}{}{
+    \exp_args:Nc \NewDocumentCommand{#1FullNames} {} {
         \getFullNames{#2}~\getSurname{#3}
+        \createIndexEntry{#2}{#3}
     }
 
-    \exp_args:Nc \NewDocumentCommand{#1NameOnly}{}{
+    \exp_args:Nc \NewDocumentCommand{#1NameOnly} {} {
         \getNickname{#2}
+        \createIndexEntry{#2}{#3}
     }
 
-    \exp_args:Nc \NewDocumentCommand{#1Surname}{}{
+    \exp_args:Nc \NewDocumentCommand{#1Surname} {} {
         \getSurname{#2}
+        \createIndexEntry{#2}{#3}
     }
 
-    \exp_args:Nc \NewDocumentCommand{#1FullNamesAndNickname}{}{
+    \exp_args:Nc \NewDocumentCommand{#1FullNamesAndNickname} {} {
         \getFullNames{#2}~\getSurname{#3}~(aka~\getNickname{#2})
+        \createIndexEntry{#2}{#3}
     }
 
-    \exp_args:Nc \NewDocumentCommand{#1Initials}{}{
+    \exp_args:Nc \NewDocumentCommand{#1Initials} {} {
         \getInitials{#2}~\getSurname{#3}
+        \createIndexEntry{#2}{#3}
     }
 
-    \exp_args:Nc \NewDocumentCommand{#1NameNee}{}{
+    \exp_args:Nc \NewDocumentCommand{#1NameNee} {} {
         \getNickname{#2}~\getSurname{#3}~(née~\getSurname{#2})
+        \createIndexEntry{#2}{#3}
     }
 
-    \exp_args:Nc \NewDocumentCommand{#1FullNamesNee}{}{
+    \exp_args:Nc \NewDocumentCommand{#1FullNamesNee} {} {
         \getFullNames{#2}~\getSurname{#3}~(née~\getSurname{#2})
+        \createIndexEntry{#2}{#3}
     }
 }
 
