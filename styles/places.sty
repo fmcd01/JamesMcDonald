@@ -1,0 +1,36 @@
+\ProvidesPackage{./styles/places}
+
+\NewDocumentCommand{\state} {m m} {
+    \expandafter\newcommand\csname #1\endcsname{#2\index[places]{#2}}
+    \expandafter\newcommand\csname #1NoIndex\endcsname{#2}
+}
+
+\NewDocumentCommand{\regionAndSub} {m m m} {
+    \expandafter\newcommand\csname #1\endcsname{{#2}\index[places]{#3!#2}}
+    \expandafter\newcommand\csname #1Full\endcsname{{#2, #3}\index[places]{#3!#2}}
+    \expandafter\newcommand\csname #1NoIndex\endcsname{{#2}}
+}
+
+\NewDocumentCommand{\country} {m m m} {
+    \regionAndSub{#1}{#2}{#3}
+}
+
+\NewDocumentCommand{\city} {m m m} {
+    \regionAndSub{#1}{#2}{#3}
+}
+
+\NewDocumentCommand{\boroughOrCounty} {m m m} {
+    \regionAndSub{#1}{#2}{#3}
+}
+
+\NewDocumentCommand{\parishOrWard} {m m m} {
+    \regionAndSub{#1}{#2}{#3}
+}
+
+\NewDocumentCommand{\street} {m m m} {
+    \regionAndSub{#1}{#2}{#3}
+}
+
+\NewDocumentCommand{\building} {m m m} {
+    \regionAndSub{#1}{#2}{#3}
+}

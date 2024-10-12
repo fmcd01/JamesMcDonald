@@ -1,12 +1,11 @@
 %! program = pdflatex
-\documentclass[showtrims,british]{memoir}
+\documentclass[showtrims]{memoir}
 \input{preamble}
 
 
 \begin{document}
 \input{macros/people}
 \input{macros/placenames}
-\input{macros/terms}
 
 \frontmatter
 \include{frontmatter/titlepage}

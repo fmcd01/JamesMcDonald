@@ -1,0 +1,33 @@
+%%% Macros for States
+\state{unitedKingdom}{United~Kingdom}
+\state{southAfrica}{South~Africa}
+
+%%% Macros for Countries
+\country{england}{England}{\unitedKingdomNoIndex}
+\country{scotland}{Scotland}{\unitedKingdomNoIndex}
+\country{capeColony}{Cape~Colony}{\southAfricaNoIndex}
+
+%%% Macros for Cities
+\city{london}{London}{\englandNoIndex}
+\city{grahamstown}{Grahamstown}{\capeColonyNoIndex}
+
+%%% Macros for Boroughs or Counties
+\boroughOrCounty{islington}{Islington}{\londonNoIndex}
+\boroughOrCounty{hackney}{Hackney}{\londonNoIndex}
+\boroughOrCounty{cityOfLondon}{City of London}{\londonNoIndex}
+\boroughOrCounty{cityOfwestminster}{City of Westminster}{\londonNoIndex}
+\boroughOrCounty{lanarkshire}{Lanarkshire}{\scotlandNoIndex}
+
+%%% Macros for Parishes or Wards
+\parishOrWard{bishopsgate}{Bishopsgate}{\cityOfLondonNoIndex}
+\parishOrWard{oldStreet}{Old~Street}{\islingtonNoIndex}
+\parishOrWard{shoreditch}{Shoreditch}{\hackneyNoIndex}
+\parishOrWard{crawford}{Crawford}{\lanarkshireNoIndex}
+
+%%% Macros for Streets
+\street{stMaryAxeStreet}{St~Mary~Axe~Street}{\cityOfLondonNoIndex}
+\street{strand}{Strand}{\cityOfLondonNoIndex}
+
+%%% Macros for Buildings, Properties, Estates of Farms
+\building{stBotolphWithoutBishopsgate}{St~Botolph-without-Bishopsgate}{\bishopsgateNoIndex}
+\building{northumberlandCourt}{Northumberland~Court}{\strandNoIndex}

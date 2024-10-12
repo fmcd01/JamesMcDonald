@@ -20,6 +20,7 @@
 \usepackage[makeindex]{imakeidx}
 \makeindex[name=main,title=Index,columns=1]
 \makeindex[name=people,title=Index of People,columns=1]
+\makeindex[name=places,title=Index of Places,columns=1]
 %\renewcommand{\seealso}[2]{\\\textit{see also} #1}
 
 %%% BIBLIOGRAPHY
@@ -33,6 +34,11 @@
 
 %%% Helper package to create person commands
 \usepackage{./styles/names} % For defining names
+\usepackage{./styles/places} % For defining places
+
+%%% Helper package to create date commands
+\usepackage[useregional]{datetime2}
+\DTMlangsetup[en-GB]{}
 
 %%% SET THE DEFAULT FONT TO PALATINO
 %\usepackage{mathpazo}
