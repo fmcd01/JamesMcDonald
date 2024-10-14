@@ -1,6 +1,100 @@
-@book{example,
-  title     = {The Old Man and the Sea},
-  author    = {Hemingway, Ernest},
-  year      = 1952,
-  publisher = {Charles Scribner's Sons}
+@xdata{Ancestry,
+  author = {{Ancestry.com}}
+}
+  
+@xdata{eggsa,
+  author = {eGGSA}
+}
+
+@xdata{eggsa:SettlerCorrespondence,
+  xdata  = {eggsa},
+  editor = {Mckay, Sue},
+  title  = {The 1820 Settler Correspondence}
+}
+
+@xdata{FS,
+  author = {{FamilySearch}}
+}
+
+@xdata{settlers,
+  author = {{1820settlers.com}}
+}
+  
+@xdata{settlers:database,
+  xdata  = {settlers},
+  title  = {1820 Settlers Database [database on-line]:},
+  editor = {Tanner-Tremaine, Paul}
+}
+
+@online{Ancestry:JamesMcDonaldMarriage,
+  xdata   = {Ancestry},
+  note    = {London Metropolitan Archives; London, England; London Church of England Parish Registers; Reference Number: P69/BOT4/A/01/MS 4520/9},
+  title   = {London, England, Church of England Marriages and Banns, 1754-1936 [database on-line]},
+  url     = {https://www.ancestry.co.uk/imageviewer/collections/1623/images/31281_a101385-00130},
+  urldate = {2024-09-02},
+  year    = {1817}
+}
+
+@online{eggsa:biggarCorrespondance,
+  xdata    = {eggsa:SettlerCorrespondence},
+  note     = {The 1820 Settler Correspondence, National Archives, Kew CO48/41},
+  subtitle = {Correspondence before emigration},
+  url      = {https://www.eggsa.org/1820-settlers/index.php/correspondence/pre-1820-letters/b-menu/103-2011-01-01-19-08-26},
+  urldate  = {2024-08-29},
+  year     = {2024}
+}
+
+@online{eggsa:biggarReturn,
+  xdata    = {eggsa:SettlerCorrespondence},
+  subtitle = {Related Records: Settler Returns},
+  note     = {Settler Returns, National Archives, Kew CO48/47},
+  url      = {https://www.eggsa.org/1820-settlers/index.php/related-records/settler-returns/1908-biggar-s-party},
+  urldate  = {2024-08-29},
+  year     = {2024}
+}
+
+@online{FS:JamesMcDonaldBaptism,
+  xdata    = {FS},
+  title    = {Scotland Births and Baptisms, 1564-1950 [database on-line]},
+  subtitle = {James McDonald, Baptism},
+  url      = {https://www.familysearch.org/ark:/61903/1:1:XTLF-YZB},
+  urldate  = {2024-09-16},
+  year     = {1789}
+}
+
+@online{FS:JamesMcDonaldMarriage,
+  xdata    = {FS},
+  title    = {England Marriages, 1538-1973 [database on-line]},
+  subtitle = {James MacDonald, Marriage},
+  url      = {https://familysearch.org/ark:/61903/1:1:NKDV-55Q},
+  urldate  = {2024-08-27},
+  year     = {1817}
+}
+
+@book{nash:1820,
+  address   = {19 Estmil Road, Diep Rivier 7800},
+  author    = {Nash, M.D.},
+  edition   = {First},
+  isbn      = {0620109408},
+  publisher = {Chameleon Press},
+  title     = {The Settlers Handbook},
+  year      = {1987}
+}
+
+@online{settlers:JamesMcDonald,
+  xdata    = {settlers:database},
+  date     = {2021-09-12},
+  subtitle = {James McDonald},
+  url      = {https://www.1820settlers.com/genealogy/getperson.php?personID=I59083},
+  urldate  = {2024-09-15},
+  note     = {Person ID: I59083}
+}
+
+@online{settlers:MaryWelch,
+  xdata    = {settlers:database},
+  date     = {2021-09-12},
+  subtitle = {Mary Welch},
+  url      = {https://www.1820settlers.com/genealogy/getperson.php?personID=I84430},
+  urldate  = {2024-10-12},
+  note     = {Person ID: I84430}
 }
