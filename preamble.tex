@@ -31,10 +31,12 @@
 \usepackage{lipsum} % For dummy text
 \usepackage[svgnames]{xcolor} % Required for colour specification
 \usepackage{xparse} % Required for defining new commands
+\usepackage{ragged2e}
 
 %%% Helper package to create person commands
 \usepackage{./styles/names} % For defining names
 \usepackage{./styles/places} % For defining places
+\usepackage{./styles/symbols} % For defining symbols
 
 %%% Helper package to create date commands
 \usepackage[useregional]{datetime2}
@@ -42,6 +44,9 @@
 
 %%% SET THE DEFAULT FONT TO PALATINO
 %\usepackage{mathpazo}
+
+%%% tcolorbox
+\usepackage{tcolorbox}
 
 %%% CREATE A CUSTOM PAGE STYLE
 \makepagestyle{mystyle}
