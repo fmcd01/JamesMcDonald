@@ -1,20 +1,13 @@
 \chapter[James McDonald]{\mcdonaldJName{}}
 \label{ch1: James McDonald}
 
-\hfill
-\begin{minipage}{\goldenratio\textwidth}
-    \begin{tcolorbox}[title=\mcdonaldJFullNames~\male, after title={\hfill a}]
-        \begin{tabularx}{\linewidth}{@{}>{\bfseries}r@{~}>{\RaggedRight}X@{}}
-            \born       & \DTMdate{1789-10-09}, \crawfordFull{}, \scotland{}      \\
-            \christened & \DTMdate{1789-10-11}, \scotland{}                       \\
-            \died       & \before~\DTMdate{1822-11-07}, \capeColony, \southAfrica
-        \end{tabularx}
-        \tcblower
-        \begin{tabularx}{\linewidth}{@{}>{\bfseries}r@{~}>{\RaggedRight}X@{}}
-            \married & \welchMName{}, \DTMdate{1817-05-12}, \stBotolphWithoutBishopsgate{}
-        \end{tabularx}
-    \end{tcolorbox}
-\end{minipage}
+\genealogyInfoBox[a]{\male~\mcdonaldJName{}}{
+    \bornEntry{\DTMDate{1789-10-9}}{\crawfordFull{}, \scotland{}} \\
+    \christenedEntry{\DTMDate{1789-10-11}}{\scotland{}} \\
+    \diedEntry{\before~\DTMDate{1822-11-07}}{\capeColony, \southAfrica}
+}{
+    \marriedEntry{\DTMDate{1817-05-12}}{\stBotolphWithoutBishopsgate{}}{\welchMName}
+}
 
 \section[Mary Welch]{\welchMName{}}
 \label{sec: James McDonald and Mary Welch}

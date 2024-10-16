@@ -1,0 +1,30 @@
+\ProvidesPackage{./styles/genealogybox}
+
+% Define a command for individual entries
+\NewDocumentCommand{\entry}{ m m m o }{
+    {#1} & \IfValueT{#4}{ #4,} {#2}, #3.
+}
+
+% Define commands for specific entries in the genealogy box
+\NewDocumentCommand{\bornEntry}{ m m }{\entry{\born}{#1}{#2}}
+\NewDocumentCommand{\christenedEntry}{ m m }{\entry{\christened}{#1}{#2}}
+\NewDocumentCommand{\diedEntry}{ m m }{\entry{\died}{#1}{#2}}
+\NewDocumentCommand{\diedJewishEntry}{ m m }{\entry{\diedjewish}{#1}{#2}}
+\NewDocumentCommand{\marriedEntry}{ m m m }{\entry{\married}{#1}{#2}[#3]}
+\NewDocumentCommand{\divorcedEntry}{ m m m }{\entry{\divorced}{#1}{#2}[#3]}
+
+% Define a command for the tcolorbox content with flexible entries
+\NewDocumentCommand{\genealogyInfoBox} { o m +m +m } {
+
+    \begin{tcolorbox}[title={#2}, after title={ \IfValueT{#1}{\hfill[~#1~]}}]
+        \begin{tabularx}{\linewidth}{@{}>{\bfseries}r@{~}>{\RaggedRight}X@{}}
+            #3
+        \end{tabularx}
+        \tcblower
+        \begin{tabularx}{\linewidth}{@{}>{\bfseries}r@{~}>{\RaggedRight}X@{}}
+            #4
+        \end{tabularx}
+    \end{tcolorbox}
+
+}
+
