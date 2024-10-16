@@ -1,5 +1,10 @@
 Aitchison
+Algoa
+Brak
+Drie
+Fontein
 Henman
 PALATINO
 pdflatex
+Rivier
 Wynand
