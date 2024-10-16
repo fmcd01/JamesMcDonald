@@ -9,6 +9,7 @@
 \setulmarginsandblock{15mm}{15mm}{*}
 \setheadfoot{\onelineskip}{2\onelineskip}
 \setheaderspaces{*}{*}{1.618}
+\raggedbottom
 \checkandfixthelayout
 
 %%% TITLE PAGE
@@ -32,6 +33,8 @@
 \usepackage[svgnames]{xcolor} % Required for colour specification
 \usepackage{xparse} % Required for defining new commands
 \usepackage{ragged2e}
+\usepackage[final]{microtype} % Less badboxes
+\usepackage[x11names,dvipsnames,table]{xcolor} % Required for colour specification
 
 %%% Helper package to create person commands
 \usepackage{./styles/names} % For defining names
@@ -43,11 +46,16 @@
 \usepackage[useregional]{datetime2}
 \DTMlangsetup[en-GB]{}
 
-%%% SET THE DEFAULT FONT TO PALATINO
-%\usepackage{mathpazo}
-
 %%% tcolorbox
 \usepackage{tcolorbox}
+
+%%% Formatting of Quotes
+\usepackage[
+    autostyle
+]{csquotes} % Quotes
+
+%%% Allowing importing of latex files
+\usepackage{import} % Used for the import command
 
 %%% CREATE A CUSTOM PAGE STYLE
 \makepagestyle{mystyle}

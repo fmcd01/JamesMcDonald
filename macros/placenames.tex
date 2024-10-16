@@ -1,6 +1,7 @@
 %%% Macros for States
 \state{unitedKingdom}{United~Kingdom}
 \state{southAfrica}{South~Africa}
+\state{britain}{Britain}
 
 %%% Macros for Countries
 \country{england}{England}{\unitedKingdomNoIndex}
@@ -8,18 +9,25 @@
 \country{capeColony}{Cape~Colony}{\southAfricaNoIndex}
 
 %%% Macros for Cities
+\city{algoaBay}{Algoa~Bay}{\capeColonyNoIndex}
 \city{london}{London}{\englandNoIndex}
 \city{grahamstown}{Grahamstown}{\capeColonyNoIndex}
+\city{portElizabeth}{Port~Elizabeth}{\capeColonyNoIndex}
+\city{portsmouth}{Portsmouth}{\englandNoIndex}
 
 %%% Macros for Boroughs or Counties
+\boroughOrCounty{albany}{Albany}{\capeColonyNoIndex}
 \boroughOrCounty{islington}{Islington}{\londonNoIndex}
 \boroughOrCounty{hackney}{Hackney}{\londonNoIndex}
-\boroughOrCounty{cityOfLondon}{City of London}{\londonNoIndex}
-\boroughOrCounty{cityOfwestminster}{City of Westminster}{\londonNoIndex}
+\boroughOrCounty{cityOfLondon}{City~of~London}{\londonNoIndex}
+\boroughOrCounty{cityOfwestminster}{City~of~Westminster}{\londonNoIndex}
 \boroughOrCounty{lanarkshire}{Lanarkshire}{\scotlandNoIndex}
+\boroughOrCounty{easternCape}{Eastern~Cape}{\capeColonyNoIndex}
 
 %%% Macros for Parishes or Wards
+\parishOrWard{brakRivier}{Brak~Rivier}{\capeColonyNoIndex}
 \parishOrWard{bishopsgate}{Bishopsgate}{\cityOfLondonNoIndex}
+\parishOrWard{drieFontein}{Drie~Fontein}{\capeColonyNoIndex}
 \parishOrWard{oldStreet}{Old~Street}{\islingtonNoIndex}
 \parishOrWard{shoreditch}{Shoreditch}{\hackneyNoIndex}
 \parishOrWard{crawford}{Crawford}{\lanarkshireNoIndex}
@@ -31,3 +39,4 @@
 %%% Macros for Buildings, Properties, Estates of Farms
 \building{stBotolphWithoutBishopsgate}{St~Botolph-without-Bishopsgate}{\bishopsgateNoIndex}
 \building{northumberlandCourt}{Northumberland~Court}{\strandNoIndex}
+\building{somersetFarm}{Somerset~Farm}{\easternCapeNoIndex}
