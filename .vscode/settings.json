@@ -1,5 +1,11 @@
 {
+  "workbench.startupEditor": "none",
+  "workbench.editor.enablePreview": false,
+  "extensions.ignoreRecommendations": true,
   "explorer.excludeGitIgnore": true,
+  "explorer.confirmDragAndDrop": false,
+  "git.suggestSmartCommit": false,
+  "git.confirmSync": false,
   "cSpell.language": "en-GB",
   "cSpell.enabled": true,
   "cSpell.customDictionaries": {
@@ -14,9 +20,13 @@
   "files.exclude": {
     "**/.vscode": true
   },
+  "editor.minimap.enabled": false,
+  "editor.wordWrap": "bounded",
   "editor.formatOnSave": true,
   "[latex]": {
-    "editor.defaultFormatter": "James-Yu.latex-workshop"
+    "editor.defaultFormatter": "James-Yu.latex-workshop",
+    "editor.formatOnPaste": false,
+    "editor.suggestSelection": "recentlyUsedByPrefix"
   },
   "latex-workshop.formatting.latex": "latexindent",
   "latex-workshop.formatting.latexindent.path": "latexindent",
